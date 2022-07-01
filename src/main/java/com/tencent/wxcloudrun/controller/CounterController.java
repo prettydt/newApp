@@ -61,14 +61,15 @@ public class CounterController {
 
     Optional<Counter> curCounter = counterService.getCounter(1);
     if (request.getAction().equals("inc")) {
-      Integer count = 2;
+      Integer count = 1;
       if (curCounter.isPresent()) {
-        count += curCounter.get().getCount();
+        count += 2;
       }
       Counter counter = new Counter();
       counter.setId(1);
       counter.setCount(count);
       counterService.upsertCount(counter);
+      //ApiResponse.ok("action: {}");
       return ApiResponse.ok(count);
     } else if (request.getAction().equals("clear")) {
       if (!curCounter.isPresent()) {
