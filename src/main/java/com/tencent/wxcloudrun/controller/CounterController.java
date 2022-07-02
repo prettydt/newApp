@@ -58,7 +58,7 @@ public class CounterController {
   @PostMapping(value = "/api/count")
   ApiResponse create(@RequestBody CounterRequest request) {
     logger.info("/api/count post request, action: {}", request.getAction());
-
+    logger.info("/api/count post request, request: {}", request.toString());
     Optional<Counter> curCounter = counterService.getCounter(1);
     if (request.getAction().equals("inc")) {
       Integer count = 1;
