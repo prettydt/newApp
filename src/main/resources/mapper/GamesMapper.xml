@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.GamesMapper">
+
+    <resultMap id="gamesMapper" type="com.tencent.wxcloudrun.model.Games">
+        <id property="id" column="id"/>
+        <result property="begintime" column="begintime" javaType="java.time.LocalDateTime" />
+        <result property="endtime" column="endtime" javaType="java.time.LocalDateTime"  />
+        <result property="title" column="title" javaType="java.lang.String"  />
+    </resultMap>
+
+    <select id="getGame" resultMap="gamesMapper" parameterType="com.tencent.wxcloudrun.model.Games">
+        SELECT id, begintime, endtime, title, location, siteno, useball, actiontype, asklevel, people, club, manager, price, addperson, addprice, paytype, paymessage, cancel, description, singedpeople, substitute
+        FROM Games
+        WHERE id = #{id}
+    </select>
+
+</mapper>

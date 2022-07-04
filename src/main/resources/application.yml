@@ -8,6 +8,11 @@ spring:
     url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE:springboot_demo}
     username: ${MYSQL_USERNAME}
     password: ${MySQL_PASSWORD}
+#    url: jdbc:mysql://${MYSQL_ADDRESS}/${MYSQL_DATABASE:springboot_demo}
+#    url: jdbc:mysql://localhost:3306/springboot_demo?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#
+#    username: root
+#    password: password01
   mvc:
     view:
       suffix: .html

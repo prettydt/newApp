@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * counter控制器
@@ -39,6 +40,9 @@ public class CounterController {
   @GetMapping(value = "/api/count")
   ApiResponse get() {
     logger.info("/api/count get request");
+    String replaceUUID = UUID.randomUUID().toString().replace("-", "");
+
+    logger.info("UUID"+replaceUUID);
     Optional<Counter> counter = counterService.getCounter(1);
     Integer count = 0;
     if (counter.isPresent()) {
