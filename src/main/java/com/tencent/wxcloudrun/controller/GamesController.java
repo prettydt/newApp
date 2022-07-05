@@ -50,6 +50,7 @@ public class GamesController {
         List<Games> game = gamesService.getGameByCondition(SearchText,day);
         return ApiResponse.ok(game);
     }
+    //增加game
     @PostMapping(value = "/api/createGame")
     ApiResponse createGame(@RequestBody GamesRequest request) {
         logger.info("/api/count get request");
