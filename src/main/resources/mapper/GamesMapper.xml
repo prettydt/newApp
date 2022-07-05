@@ -4,8 +4,9 @@
 
     <resultMap id="gamesMapper" type="com.tencent.wxcloudrun.model.Games">
         <id property="id" column="id"/>
-        <result property="begintime" column="begintime" javaType="java.time.LocalDateTime" />
-        <result property="endtime" column="endtime" javaType="java.time.LocalDateTime"  />
+        <result property="day" column="day" javaType="java.time.LocalDate"  />
+        <result property="begintime" column="begintime" javaType="java.time.LocalTime" />
+        <result property="endtime" column="endtime" javaType="java.time.LocalTime"  />
         <result property="title" column="title" javaType="java.lang.String"  />
     </resultMap>
 
@@ -14,5 +15,14 @@
         FROM Games
         WHERE id = #{id}
     </select>
-
+    <select id="getGameByCondition" resultMap="gamesMapper" parameterType="com.tencent.wxcloudrun.model.Games">
+        SELECT id, day,begintime, endtime, title, location, siteno, useball, actiontype, asklevel, people, club, manager, price, addperson, addprice, paytype, paymessage, cancel, description, singedpeople, substitute
+        FROM Games
+        WHERE day = #{day}
+        and   title like concat('%',#{title,jdbcType=VARCHAR},'%')
+    </select>
+    <select id="createGame" resultMap="gamesMapper" parameterType="com.tencent.wxcloudrun.model.Games">
+        INSERT INTO  springboot_demo.games (id, day, begintime, endtime, title, location, siteno, useball, actiontype, asklevel, people, club, manager, price, addperson, addprice, paytype, paymessage, cancel, description, singedpeople, substitute)
+        values (#{games.id}, #{games.day}, #{games.begintime}, #{games.endtime}, #{games.title}, #{games.location}, #{games.siteno}, #{games.useball}, #{games.actiontype}, #{games.asklevel}, #{games.people}, #{games.club}, #{games.manager}, #{games.price}, #{games.addperson}, #{games.addprice}, #{games.paytype}, #{games.paymessage}, #{games.cancel}, #{games.description}, #{games.singedpeople}, #{games.substitute})
+    </select>
 </mapper>

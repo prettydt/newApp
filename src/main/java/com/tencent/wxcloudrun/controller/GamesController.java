@@ -13,6 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,6 +40,24 @@ public class GamesController {
         logger.info("/api/count get request");
         String id = request.getId();
         Optional<Games> game = gamesService.getGame(id);
+        return ApiResponse.ok(game);
+    }
+    @PostMapping(value = "/api/gameByCondition")
+    ApiResponse getByCondition(@RequestBody GamesRequest request) {
+        logger.info("/api/count get request");
+        LocalDate day = request.getDay();
+        String SearchText = request.getSearchText();
+        List<Games> game = gamesService.getGameByCondition(SearchText,day);
+        return ApiResponse.ok(game);
+    }
+    @PostMapping(value = "/api/createGame")
+    ApiResponse createGame(@RequestBody GamesRequest request) {
+        logger.info("/api/count get request");
+        Games requestGames = request.getGames();
+
+        Games games = new Games();
+        games = requestGames;
+        Games game = gamesService.createGame(games);
         return ApiResponse.ok(game);
     }
 }
